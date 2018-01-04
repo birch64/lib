@@ -179,3 +179,34 @@ function Start-XXRadmin {
 	}
 }
 
+function Start-XXRDP {
+<#
+		.SYNOPSIS
+			Starts a RDP sessions to a specific computer
+		.DESCRIPTION
+		.NOTES
+		.LINK
+		.EXAMPLE
+			Start-XXRadmin -computer l-be-ki-dehouwe
+		.PARAMETER computer
+			  The computer to which a remote session is started
+#>
+	
+		[CmdletBinding()]
+		param (
+			[parameter (Mandatory=$true)]
+			$Computer,
+			[parameter (Mandatory=$false)]
+			$F
+		)
+		
+		$systemroot = $env:windir + "\system32"
+
+		if ($f) {
+			Start-Process -FilePath ($systemroot + "\mstsc.exe") -ArgumentList ("/f /v:" + $computer) 
+			}
+			else {
+			Start-Process -FilePath ($systemroot + "\mstsc.exe") -ArgumentList ("/w:1440 /h:900 /v:" + $computer) 
+		}
+}
+
